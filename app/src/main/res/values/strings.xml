@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">FStock</string>
+    <string name="app_login">Entrar</string>
+    <string name="app_signIn">Registrar</string>
+    <string name="app_password">Senha</string>
+    <string name="app_userEmail">Email</string>
+    <string name="app_userName">Nome</string>
+    <string name="app_confirmPass">Confirmar Senha</string>
 </resources>
