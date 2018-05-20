@@ -7,9 +7,12 @@
     android:baselineAligned="false"
     android:orientation="vertical"
     android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    tools:context=".MainActivity">
+    android:layout_marginRight="10dp" >
 
+    <TextView
+        android:id="@+id/textao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <ImageView
         android:id="@+id/imageLogo"
         android:layout_width="140dp"
