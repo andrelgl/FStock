@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kn.fstock.fstock">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,15 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:theme="@style/AppThemeNoActionBar">
+        <activity
+            android:name=".Activities.MainActivity"
+            android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SingInActivity" android:theme="@style/AppThemeNoActionBar">
-        </activity>
+        <activity
+            android:name=".Activities.SingInActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".Activities.MainMenuActivity"
+            android:label="@string/app_estoques"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

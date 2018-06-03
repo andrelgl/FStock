@@ -13,9 +13,14 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:hint="@string/app_userName"
-        android:layout_weight="0.5"
+
         android:textColorHint="@color/colorWhite"
         android:backgroundTint="@color/colorWhite"/>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="5px" />
 
     <EditText
         android:id="@+id/editText"
@@ -24,9 +29,14 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/app_userEmail"
-        android:layout_weight="0.5"
+
         android:textColorHint="@color/colorWhite"
         android:backgroundTint="@color/colorWhite"/>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="5px" />
 
     <EditText
         android:id="@+id/editText5"
@@ -35,10 +45,13 @@
         android:ems="10"
         android:inputType="textPassword"
         android:hint="@string/app_password"
-        android:layout_weight="0.5"
         android:textColorHint="@color/colorWhite"
         android:backgroundTint="@color/colorWhite"/>
 
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="5px" />
     <EditText
         android:id="@+id/editText6"
         android:layout_width="match_parent"
@@ -46,9 +59,12 @@
         android:ems="10"
         android:inputType="textPassword"
         android:hint="@string/app_confirmPass"
-        android:layout_weight="0.5"
         android:textColorHint="@color/colorWhite"
         android:backgroundTint="@color/colorWhite"/>
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="5px" />
 
     <Button
         android:id="@+id/button"

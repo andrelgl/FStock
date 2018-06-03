@@ -2,28 +2,11 @@ package kn.fstock.fstock.models;
 
 import java.util.List;
 
-public class Pessoa
-{
-    public int id;
-    public String nome;
-    public String email;
-    public List<Object> estoques;
+public class Pessoa extends Base {
+    private String email;
+    private String senha;
+    private List<Estoque> estoques;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getEmail() {
         return email;
@@ -33,11 +16,19 @@ public class Pessoa
         this.email = email;
     }
 
-    public List<Object> getEstoques() {
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public List<Estoque> getEstoques() {
         return estoques;
     }
 
-    public void setEstoques(List<Object> estoques) {
+    public void setEstoques(List<Estoque> estoques) {
         this.estoques = estoques;
     }
 }
