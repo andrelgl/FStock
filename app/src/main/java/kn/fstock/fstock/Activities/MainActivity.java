@@ -10,21 +10,16 @@ import kn.fstock.fstock.R;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
     }
-
 
     public void singIn(View v){
         startActivity(new Intent(getBaseContext(), SingInActivity.class));
     }
     public void mainMenu(View v){
-        startActivity(new Intent(getBaseContext(), MainMenuActivity.class));
+        startActivity(new Intent(getBaseContext(), PrincipalActivity.class));
     }
 }
