@@ -6,11 +6,21 @@ import kn.fstock.fstock.Services.ProdutoService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitInitilizer {
-    Retrofit retrofit = new Retrofit.Builder()
+public class ApiFstock {
+    private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://fstock.herokuapp.com/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+
+    private static ApiFstock INSTANSE;
+    private ApiFstock(){}
+    public static ApiFstock getInstance(){
+        if(INSTANSE == null){
+            INSTANSE = new ApiFstock();
+        }
+        return INSTANSE;
+    }
+
 
     public PessoaService descricaoPessoaService()  {
         return retrofit.create(PessoaService.class);
