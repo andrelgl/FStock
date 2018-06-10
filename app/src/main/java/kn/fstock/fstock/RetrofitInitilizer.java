@@ -3,8 +3,6 @@ package kn.fstock.fstock;
 import kn.fstock.fstock.Services.EstoqueService;
 import kn.fstock.fstock.Services.PessoaService;
 import kn.fstock.fstock.Services.ProdutoService;
-import kn.fstock.fstock.Services.RecipienteService;
-import kn.fstock.fstock.Services.TipoService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -23,11 +21,4 @@ public class RetrofitInitilizer {
     public ProdutoService descricaoProdutoService()  {
         return retrofit.create(ProdutoService.class);
     }
-    public RecipienteService descricaoRecipienteService()  {
-        return retrofit.create(RecipienteService.class);
-    }
-    public TipoService descricaoTipoService()  {
-        return retrofit.create(TipoService.class);
-    }
-
 }

@@ -5,7 +5,6 @@ import java.util.List;
 public class Pessoa extends Base {
     private String email;
     private String senha;
-    private List<Estoque> estoques;
 
 
     public String getEmail() {
@@ -24,11 +23,5 @@ public class Pessoa extends Base {
         this.senha = senha;
     }
 
-    public List<Estoque> getEstoques() {
-        return estoques;
-    }
 
-    public void setEstoques(List<Estoque> estoques) {
-        this.estoques = estoques;
-    }
 }

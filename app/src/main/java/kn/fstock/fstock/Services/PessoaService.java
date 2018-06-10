@@ -13,17 +13,20 @@ import retrofit2.http.Path;
 
 public interface PessoaService {
     @GET("pessoa/")
-    Call<List<Pessoa>> listarPessoas();
+    Call<List<Pessoa>> listarPessoasEstoque();
 
-    @GET("pessoa/{id}")
-    Call<Pessoa> buscarPessoa(@Path("id") long id);
+    @GET("pessoa/{pessoa_id}")
+    Call<Pessoa> buscarPessoa(@Path("pessoa_id") int id);
 
     @POST("pessoa/")
     Call<Void> criarPessoa(@Body Pessoa pessoa);
 
-    @PUT("pessoa/{id}")
-    Call<Void> alteraPessoa(@Path("id") long id, @Body Pessoa pessoa);
+    @POST("pessoa/autenticar")
+    Call<Pessoa> autenticarPessoa(@Body Pessoa pessoa);
 
-    @DELETE("pessoa/{id}")
-    Call<Void> deletarPessoa(@Path("id") long id);
+    @PUT("pessoa/{pessoa_id}")
+    Call<Void> alteraPessoa(@Path("pessoa_id") int id, @Body Pessoa pessoa);
+
+    @DELETE("pessoa/{pessoa_id}")
+    Call<Void> deletarPessoa(@Path("pessoa_id") int id);
 }

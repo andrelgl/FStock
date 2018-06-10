@@ -35,29 +35,9 @@ public class MainMenuActivity extends AppCompatActivity {
         LinearLayoutManager.VERTICAL, false);
         t.setLayoutManager(layout);
 
-
         //retrofit fazendo seu trabalho
         RetrofitInitilizer retro = new RetrofitInitilizer();
 
-        retro.descricaoPessoaService().listarPessoas().enqueue(
-                new Callback<List<Pessoa>>() {
-
-                    @Override
-                    public void onResponse(Call<List<Pessoa>> call, Response<List<Pessoa>> response) {
-                        List<String> b = new ArrayList<>();
-                        for (Pessoa p : response.body()) {
-                            b.add(p.getNome());
-                        }
-
-                        t.setAdapter(new AdapterListaEstoque(b, MainMenuActivity.this));
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Pessoa>> call, Throwable t) {
-
-                    }
-                }
-        );
     }
 
 }

@@ -1,67 +1,40 @@
 package kn.fstock.fstock.models;
 
 public class Produto extends Base {
-    private double quantMinima;
-    private double quantMaxima;
-    private double quantAtual;
-    private String imagem;
-    private String data;
-    private Estoque estoqueId;
-    private Tipo tipoId;
+    private double qtd_min;
+    private double qtd_max;
+    private double qtd;
+    private int estoque_id;
 
-    public double getQuantMinima() {
-        return quantMinima;
+    public double getQtd_min() {
+        return qtd_min;
     }
 
-    public void setQuantMinima(double quantMinima) {
-        this.quantMinima = quantMinima;
+    public void setQtd_min(double qtd_min) {
+        this.qtd_min = qtd_min;
     }
 
-    public double getQuantMaxima() {
-        return quantMaxima;
+    public double getQtd_max() {
+        return qtd_max;
     }
 
-    public void setQuantMaxima(double quantMaxima) {
-        this.quantMaxima = quantMaxima;
+    public void setQtd_max(double qtd_max) {
+        this.qtd_max = qtd_max;
     }
 
-    public double getQuantAtual() {
-        return quantAtual;
+    public double getQtd() {
+        return qtd;
     }
 
-    public void setQuantAtual(double quantAtual) {
-        this.quantAtual = quantAtual;
+    public void setQtd(double qtd) {
+        this.qtd = qtd;
     }
 
-    public String getImagem() {
-        return imagem;
+    public int getEstoque_id() {
+        return estoque_id;
     }
 
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public Estoque getEstoqueId() {
-        return estoqueId;
-    }
-
-    public void setEstoqueId(Estoque estoqueId) {
-        this.estoqueId = estoqueId;
-    }
-
-    public Tipo getTipoId() {
-        return tipoId;
-    }
-
-    public void setTipoId(Tipo tipoId) {
-        this.tipoId = tipoId;
+    public void setEstoque_id(int estoque_id) {
+        this.estoque_id = estoque_id;
     }
 }
