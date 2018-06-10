@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import kn.fstock.fstock.Adapters.MyItemEstoqueRecyclerViewAdapter;
+import kn.fstock.fstock.Adapters.ProdutoEstoqueRecyclerViewAdapter;
 import kn.fstock.fstock.R;
-import kn.fstock.fstock.models.Estoque;
+import kn.fstock.fstock.models.Item;
 
 /**
  * A fragment representing a list of Items.
@@ -23,7 +23,7 @@ import kn.fstock.fstock.models.Estoque;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ItemEstoqueFragment extends Fragment {
+public class ProdutoEstoqueFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -35,13 +35,13 @@ public class ItemEstoqueFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ItemEstoqueFragment() {
+    public ProdutoEstoqueFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ItemEstoqueFragment newInstance(int columnCount) {
-        ItemEstoqueFragment fragment = new ItemEstoqueFragment();
+    public static ProdutoEstoqueFragment newInstance(int columnCount) {
+        ProdutoEstoqueFragment fragment = new ProdutoEstoqueFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -72,8 +72,8 @@ public class ItemEstoqueFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             //TODO receber estoque do WS
-            List<Estoque> estoqueList = new ArrayList<>();
-            recyclerView.setAdapter(new MyItemEstoqueRecyclerViewAdapter(estoqueList, mListener));
+            List<Item> estoqueList = new ArrayList<>();
+            recyclerView.setAdapter(new ProdutoEstoqueRecyclerViewAdapter(estoqueList, mListener));
         }
         return view;
     }
@@ -107,7 +107,6 @@ public class ItemEstoqueFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(Estoque item);
+        void onListFragmentInteraction(Item mItem);
     }
 }

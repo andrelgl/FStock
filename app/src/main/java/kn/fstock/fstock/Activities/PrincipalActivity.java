@@ -9,17 +9,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import kn.fstock.fstock.ApiFstock;
 import kn.fstock.fstock.R;
 import kn.fstock.fstock.fragments.EstoqueMainFragment;
-import kn.fstock.fstock.fragments.ItemEstoqueFragment;
+import kn.fstock.fstock.fragments.ProdutoEstoqueFragment;
 import kn.fstock.fstock.fragments.PerfilPessoaFragment;
 import kn.fstock.fstock.fragments.PessoasEstoqueFragment;
 import kn.fstock.fstock.models.Estoque;
+import kn.fstock.fstock.models.Item;
 import kn.fstock.fstock.models.Pessoa;
+import kn.fstock.fstock.utils.SharedPreferencesUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class PrincipalActivity extends AppCompatActivity implements ItemEstoqueFragment.OnListFragmentInteractionListener {
+public class PrincipalActivity extends AppCompatActivity implements ProdutoEstoqueFragment.OnListFragmentInteractionListener {
 
-    private TextView mTextMessage;
     private Pessoa pessoa;
     private Estoque estoque;
 
@@ -52,13 +57,38 @@ public class PrincipalActivity extends AppCompatActivity implements ItemEstoqueF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        pessoa = new Pessoa();
+        pessoa.setEmail(SharedPreferencesUtils.getUserEmail(this));
+        pessoa.setNome(SharedPreferencesUtils.getUserName(this));
+
+        getEstoque(getIntent().getIntExtra("estoque_id",-1));
+
+    }
+
+    public void getEstoque(int id){
+        ApiFstock.getInstance().descricaoEstoqueService().buscarEstoque(pessoa.getId(),id).enqueue(new Callback<Estoque>() {
+            @Override
+            public void onResponse(Call<Estoque> call, Response<Estoque> response) {
+                if(response.code() == 200){
+                    estoque = response.body();
+                    setUpNavigationBar();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Estoque> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void setUpNavigationBar(){
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     @Override
-    public void onListFragmentInteraction(Estoque item) {
+    public void onListFragmentInteraction(Item item) {
 
     }
 }

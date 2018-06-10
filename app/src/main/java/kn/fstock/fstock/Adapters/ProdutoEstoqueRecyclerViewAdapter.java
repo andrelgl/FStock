@@ -9,15 +9,15 @@ import android.widget.TextView;
 import java.util.List;
 
 import kn.fstock.fstock.R;
-import kn.fstock.fstock.fragments.ItemEstoqueFragment.OnListFragmentInteractionListener;
-import kn.fstock.fstock.models.Estoque;
+import kn.fstock.fstock.fragments.ProdutoEstoqueFragment.OnListFragmentInteractionListener;
+import kn.fstock.fstock.models.Item;
 
-public class MyItemEstoqueRecyclerViewAdapter extends RecyclerView.Adapter<MyItemEstoqueRecyclerViewAdapter.ViewHolder> {
+public class ProdutoEstoqueRecyclerViewAdapter extends RecyclerView.Adapter<ProdutoEstoqueRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Estoque> mValues;
+    private final List<Item> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyItemEstoqueRecyclerViewAdapter(List<Estoque> items, OnListFragmentInteractionListener listener) {
+    public ProdutoEstoqueRecyclerViewAdapter(List<Item> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -56,7 +56,7 @@ public class MyItemEstoqueRecyclerViewAdapter extends RecyclerView.Adapter<MyIte
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public Estoque mItem;
+        public Item mItem;
 
         public ViewHolder(View view) {
             super(view);

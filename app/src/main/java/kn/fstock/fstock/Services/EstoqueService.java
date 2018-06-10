@@ -20,7 +20,7 @@ public interface EstoqueService {
     Call<Estoque> buscarEstoque(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int id);
 
     @POST("pessoa/{pessoa_id}/estoque")
-    Call<Void> criarEstoque(@Path("pessoa_id") int pessoa_id, @Body Estoque estoque);
+    Call<Estoque> criarEstoque(@Path("pessoa_id") int pessoa_id, @Body Estoque estoque);
 
     @PUT("pessoa/{pessoa_id}/estoque/{estoque_id}")
     Call<Void> alteraEstoque(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id, @Body Estoque estoque);

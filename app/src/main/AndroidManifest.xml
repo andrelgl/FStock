@@ -25,7 +25,11 @@
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".Activities.PrincipalActivity"
-            android:label="@string/title_activity_principal"></activity>
+            android:label="@string/title_activity_principal" />
+        <activity
+            android:name=".Activities.ListaEstoqueActivity"
+            android:label="@string/title_activity_lista_estoque"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

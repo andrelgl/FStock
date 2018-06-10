@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +18,7 @@ import butterknife.ButterKnife;
 import kn.fstock.fstock.ApiFstock;
 import kn.fstock.fstock.R;
 import kn.fstock.fstock.models.Pessoa;
+import kn.fstock.fstock.utils.SharedPreferencesUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        if(SharedPreferencesUtils.getUserId(this) != -1)
+            startActivity(new Intent(getBaseContext(), ListaEstoqueActivity.class));
     }
 
     public void singIn(View v) {
@@ -64,10 +69,13 @@ public class MainActivity extends AppCompatActivity {
         ApiFstock.getInstance().descricaoPessoaService().autenticarPessoa(pessoa).enqueue(new Callback<Pessoa>() {
             @Override
             public void onResponse(Call<Pessoa> call, Response<Pessoa> response) {
-                if(response.code() == 200){
+                if (response.code() == 200) {
                     dialog.dismiss();
-                    startActivity(new Intent(getBaseContext(), PrincipalActivity.class));
-                }else{
+                    SharedPreferencesUtils.putUserEmail(MainActivity.this, response.body().getEmail());
+                    SharedPreferencesUtils.putUserName(MainActivity.this, response.body().getNome());
+                    SharedPreferencesUtils.putUserId(MainActivity.this, response.body().getId());
+                    startActivity(new Intent(getBaseContext(), ListaEstoqueActivity.class));
+                } else {
                     dialog.dismiss();
                     new AlertDialog.Builder(MainActivity.this)
                             .setMessage("Usuário ou senha inválidos")
@@ -79,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                             }).show();
                 }
             }
+
             @Override
             public void onFailure(Call<Pessoa> call, Throwable t) {
                 dialog.dismiss();

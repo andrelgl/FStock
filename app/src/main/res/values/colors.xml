@@ -6,4 +6,5 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorButtonP">#FFEBEE</color>
     <color name="colorButtonS">#FF8A80</color>
+    <color name="colorGray">#757575</color>
 </resources>
