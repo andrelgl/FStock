@@ -22,7 +22,7 @@ import kn.fstock.fstock.Adapters.ProdutoEstoqueRecyclerViewAdapter;
 import kn.fstock.fstock.ApiFstock;
 import kn.fstock.fstock.R;
 import kn.fstock.fstock.models.Estoque;
-import kn.fstock.fstock.models.Pessoa;
+import kn.fstock.fstock.models.Item;
 import kn.fstock.fstock.models.Produto;
 import kn.fstock.fstock.utils.SharedPreferencesUtils;
 import retrofit2.Call;
@@ -86,42 +86,79 @@ public class ProdutoEstoqueFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item_estoque, container, false);
+        View view = inflater.inflate(R.layout.fragment_lista_estoque, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        context = view.getContext();
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+        list.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx,int dy){
+                super.onScrolled(recyclerView, dx, dy);
 
-            List<Produto> estoqueList = new ArrayList<>();
-            adapter = new ProdutoEstoqueRecyclerViewAdapter(estoqueList, mListener);
-            recyclerView.setAdapter(adapter);
-            Call<List<Produto>> call = null;
-            switch (tipoItem) {
-                case NORMAL:
-                    call = ApiFstock.getInstance().descricaoProdutoService().listarProdutos(SharedPreferencesUtils.getUserId(getContext()), estoque.getId());
-                    break;
-                case AVENCER:
-                    break;
+                if (dy >0) {
+                    // Scroll Down
+                    if (fab.isShown()) {
+                        fab.hide();
+                    }
+                }
+                else if (dy <0) {
+                    // Scroll Up
+                    if (!fab.isShown()) {
+                        fab.show();
+                    }
+                }
             }
+        });
 
-            if (call != null) {
-                call.enqueue(new Callback<List<Produto>>() {
-                    @Override
-                    public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
-                        if (response.body() != null) {
-                            adapter.addItem(response.body());
+        List<Produto> estoqueList = new ArrayList<>();
+        adapter = new ProdutoEstoqueRecyclerViewAdapter(estoqueList, mListener);
+        list.setAdapter(adapter);
+        Call<List<Produto>> call = null;
+        switch (tipoItem) {
+            case NORMAL:
+                call = ApiFstock.getInstance().descricaoProdutoService().listarProdutos(SharedPreferencesUtils.getUserId(getContext()), estoque.getId());
+                break;
+            case AVENCER:
+                break;
+        }
+
+        if (call != null) {
+            call.enqueue(new Callback<List<Produto>>() {
+                @Override
+                public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
+                    if (response.body() != null) {
+
+                        for (Produto produto : response.body()) {
+                            ApiFstock.getInstance().descricaoProdutoService().itemListar(
+                                    SharedPreferencesUtils.getUserId(getContext()),
+                                    produto.getEstoque_id(),
+                                    produto.getId()
+                            ).enqueue(new Callback<List<Item>>() {
+                                @Override
+                                public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
+                                    if(response.body() != null) {
+                                        produto.setItems(response.body());
+                                    }
+                                    adapter.addItem(produto);
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<Item>> call, Throwable t) {
+                                    t.printStackTrace();
+                                }
+                            });
                         }
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<List<Produto>> call, Throwable t) {
-
-                    }
-                });
-            }
+                @Override
+                public void onFailure(Call<List<Produto>> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
         }
-        unbinder = ButterKnife.bind(this, view);
+
         return view;
     }
 
@@ -160,16 +197,36 @@ public class ProdutoEstoqueFragment extends Fragment {
     @OnClick(R.id.fab)
     public void onViewClicked() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Adicionar estoque");
+        builder.setTitle("Adicionar produto");
 
-        View dialogView = getLayoutInflater().inflate(R.layout.dialog_text_input, null);
-        final EditText input = dialogView.findViewById(R.id.input);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_text_input_produto, null);
+        final EditText nome = dialogView.findViewById(R.id.nome);
+        final EditText min = dialogView.findViewById(R.id.min);
+        final EditText max = dialogView.findViewById(R.id.max);
         builder.setView(dialogView);
 
         builder.setPositiveButton("OK", (dialog, which) -> {
+
+            Produto produto = new Produto(
+                    nome.getText().toString(),
+                    Double.parseDouble(min.getText().toString()),
+                    Double.parseDouble(max.getText().toString())
+            );
+
+            ApiFstock.getInstance().descricaoProdutoService().criarProduto(SharedPreferencesUtils.getUserId(context), estoque.getId(),produto).enqueue(new Callback<Produto>() {
+                @Override
+                public void onResponse(Call<Produto> call, Response<Produto> response) {
+                    Produto add = response.body();
+                    add.setItems(new ArrayList<>());
+                    adapter.addItem(response.body());
+                }
+
+                @Override
+                public void onFailure(Call<Produto> call, Throwable t) {
+
+                }
+            });
             dialog.dismiss();
-
-
         });
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
         builder.show();

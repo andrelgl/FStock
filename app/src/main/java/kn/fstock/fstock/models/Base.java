@@ -2,7 +2,7 @@ package kn.fstock.fstock.models;
 
 public class Base {
     private int id;
-    private String nome;
+    protected String nome;
 
     public int getId() {
         return id;

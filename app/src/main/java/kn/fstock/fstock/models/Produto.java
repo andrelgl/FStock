@@ -1,10 +1,22 @@
 package kn.fstock.fstock.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import kn.fstock.fstock.fragments.ProdutoEstoqueFragment;
+
 public class Produto extends Base {
     private double qtd_min;
     private double qtd_max;
     private double qtd;
     private int estoque_id;
+    private List<Item> items = new ArrayList<>();
+
+    public Produto(String nome, double qtd_min, double qtd_max) {
+        this.nome = nome;
+        this.qtd_min = qtd_min;
+        this.qtd_max = qtd_max;
+    }
 
     public double getQtd_min() {
         return qtd_min;
@@ -36,5 +48,13 @@ public class Produto extends Base {
 
     public void setEstoque_id(int estoque_id) {
         this.estoque_id = estoque_id;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }

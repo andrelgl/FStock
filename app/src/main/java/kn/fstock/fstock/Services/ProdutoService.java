@@ -20,7 +20,7 @@ public interface ProdutoService {
     Call<Produto> buscarProduto(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id, @Path("produto_id") int produto_id);
 
     @POST("pessoa/{pessoa_id}/estoque/{estoque_id}/produto")
-    Call<Void> criarProduto(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id, @Body Produto produto);
+    Call<Produto> criarProduto(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id, @Body Produto produto);
 
     @PUT("pessoa/{pessoa_id}/estoque/{estoque_id}/produto/{produto_id}")
     Call<Void> alteraProduto(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id, @Path("produto_id") int produto_id);

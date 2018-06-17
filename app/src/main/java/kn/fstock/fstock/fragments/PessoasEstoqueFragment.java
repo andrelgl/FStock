@@ -58,7 +58,6 @@ public class PessoasEstoqueFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -68,6 +67,30 @@ public class PessoasEstoqueFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pessoas_estoque, container, false);
         unbinder = ButterKnife.bind(this, view);
         configureList();
+
+
+        recyclerPessoa.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx,int dy){
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (dy >0) {
+                    // Scroll Down
+                    if (fab.isShown()) {
+                        fab.hide();
+                    }
+                }
+                else if (dy <0) {
+                    // Scroll Up
+                    if (!fab.isShown()) {
+                        fab.show();
+                    }
+                }
+            }
+        });
+
+
         return view;
     }
 
