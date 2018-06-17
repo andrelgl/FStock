@@ -69,12 +69,7 @@ public class SingInActivity extends AppCompatActivity {
                     }else {
                         new AlertDialog.Builder(SingInActivity.this)
                                 .setTitle("Erro ao cadastrar")
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                }).show();
+                                .setPositiveButton("OK", (dialog1, which) -> dialog1.dismiss()).show();
                     }
                 }
                 @Override
@@ -83,12 +78,7 @@ public class SingInActivity extends AppCompatActivity {
                     dialog.dismiss();
                     new AlertDialog.Builder(SingInActivity.this)
                             .setTitle("Erro ao cadastrar")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            }).show();
+                            .setPositiveButton("OK", (dialog12, which) -> dialog12.dismiss()).show();
                 }
             });
         }

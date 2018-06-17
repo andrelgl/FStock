@@ -19,6 +19,7 @@ import kn.fstock.fstock.Adapters.QuantidadeAdapter;
 import kn.fstock.fstock.ApiFstock;
 import kn.fstock.fstock.R;
 import kn.fstock.fstock.models.Estoque;
+import kn.fstock.fstock.models.Item;
 import kn.fstock.fstock.models.Produto;
 import kn.fstock.fstock.utils.SharedPreferencesUtils;
 import retrofit2.Call;
@@ -69,7 +70,26 @@ public class QuantidadeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if (response.body() != null) {
-                    adapter.addItem(response.body());
+                    for (Produto produto : response.body()) {
+                        ApiFstock.getInstance().descricaoProdutoService().itemListar(
+                                SharedPreferencesUtils.getUserId(getContext()),
+                                produto.getEstoque_id(),
+                                produto.getId()
+                        ).enqueue(new Callback<List<Item>>() {
+                            @Override
+                            public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
+                                if(response.body() != null) {
+                                    produto.setItems(response.body());
+                                }
+                                adapter.addItem(produto);
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<Item>> call, Throwable t) {
+                                t.printStackTrace();
+                            }
+                        });
+                    }
                 }
             }
 

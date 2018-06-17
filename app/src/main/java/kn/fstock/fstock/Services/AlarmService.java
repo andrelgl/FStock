@@ -19,10 +19,10 @@ public class AlarmService {
     }
 
     public static void createAlarm(Context context){
-        alarmIntent = new Intent ( null, AlarmReceiver.class );
+        alarmIntent = new Intent ( context, AlarmReceiver.class );
         pendingIntent = PendingIntent.getBroadcast( context.getApplicationContext(), 234324243, alarmIntent, 0 );
         alarmManager = ( AlarmManager ) context.getSystemService( ALARM_SERVICE );
-        alarmManager.setRepeating( AlarmManager.RTC_WAKEUP, uploadInterval , uploadInterval , pendingIntent );
+        alarmManager.setRepeating( AlarmManager.RTC_WAKEUP, 100 , uploadInterval , pendingIntent );
         isRunning = true;
     }
 

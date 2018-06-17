@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import kn.fstock.fstock.ApiFstock;
 import kn.fstock.fstock.R;
+import kn.fstock.fstock.Services.AlarmService;
 import kn.fstock.fstock.models.Pessoa;
 import kn.fstock.fstock.utils.SharedPreferencesUtils;
 import retrofit2.Call;
@@ -48,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        if(!AlarmService.isRunning()) {
+            AlarmService.createAlarm(this);
+        }
 
         if(SharedPreferencesUtils.getUserId(this) != -1) {
             Intent intent = new Intent(getBaseContext(), ListaEstoqueActivity.class);

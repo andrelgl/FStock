@@ -3,6 +3,7 @@
     package="kn.fstock.fstock">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -13,7 +14,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.MainActivity"
-            android:theme="@style/AppThemeNoActionBar">
+            android:theme="@style/AppThemeNoActionBar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,14 +25,20 @@
         </activity>
         <activity
             android:name=".Activities.SingInActivity"
-            android:theme="@style/AppThemeNoActionBar" />
+            android:theme="@style/AppThemeNoActionBar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
         <activity
             android:name=".Activities.EstoqueActivity"
-            android:label="@string/title_activity_principal" />
+            android:label="@string/title_activity_principal"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
         <activity
             android:name=".Activities.ListaEstoqueActivity"
             android:label="@string/title_activity_lista_estoque"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
 
         <receiver android:name=".AutoStart">
             <intent-filter>
@@ -37,6 +46,13 @@
             </intent-filter>
         </receiver>
 
+        <service android:name=".Services.NotificationService" />
+
+        <receiver android:name=".Services.AlarmReceiver">
+            <intent-filter>
+                <action android:name="kn.fstock.fstock.ALARME" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

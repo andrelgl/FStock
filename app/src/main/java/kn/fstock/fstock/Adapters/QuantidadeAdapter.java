@@ -23,7 +23,7 @@ public class QuantidadeAdapter extends RecyclerView.Adapter<QuantidadeAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_produto_a_vencer, parent, false);
+                .inflate(R.layout.item_quantidade, parent, false);
         return new ViewHolder(view);
     }
 
