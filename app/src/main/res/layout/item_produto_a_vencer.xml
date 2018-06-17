@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/layout_texto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentStart="true"
+            android:layout_margin="8dp"
+            android:layout_toStartOf="@id/layout_botoes">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data Vencimento:  "
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/vencimento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00/00/0000"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/nome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:layout_marginTop="4dp"
+                android:text="Titulo"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_botoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_alignParentEnd="true" >
+
+            <ImageButton
+                android:visibility="invisible"
+                android:id="@+id/btn_remover"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="16dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/style_circular_button"
+                android:elevation="5dp"
+                android:scaleType="fitCenter"
+                android:padding="3dp"
+                app:srcCompat="@drawable/minus_96" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

@@ -1,7 +1,6 @@
 package kn.fstock.fstock.Adapters;
 
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,18 +9,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 import kn.fstock.fstock.ApiFstock;
 import kn.fstock.fstock.R;
-import kn.fstock.fstock.fragments.ProdutoEstoqueFragment.OnListFragmentInteractionListener;
 import kn.fstock.fstock.models.Item;
 import kn.fstock.fstock.models.Produto;
 import kn.fstock.fstock.utils.SharedPreferencesUtils;
@@ -32,11 +28,9 @@ import retrofit2.Response;
 public class ProdutoEstoqueRecyclerViewAdapter extends RecyclerView.Adapter<ProdutoEstoqueRecyclerViewAdapter.ViewHolder> {
 
     private final List<Produto> mValues;
-    private final OnListFragmentInteractionListener mListener;
 
-    public ProdutoEstoqueRecyclerViewAdapter(List<Produto> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
-        mListener = listener;
+    public ProdutoEstoqueRecyclerViewAdapter(List<Produto> produtos) {
+        this.mValues = produtos;
     }
 
     @Override

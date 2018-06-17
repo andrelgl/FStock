@@ -43,18 +43,12 @@ public class ProdutoEstoqueFragment extends Fragment {
     FloatingActionButton fab;
     Unbinder unbinder;
     private Estoque estoque;
-    private TipoItem tipoItem;
     private ProdutoEstoqueRecyclerViewAdapter adapter;
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-    }
-
-    enum TipoItem {
-        NORMAL,
-        AVENCER
     }
 
     private OnListFragmentInteractionListener mListener;
@@ -69,10 +63,9 @@ public class ProdutoEstoqueFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ProdutoEstoqueFragment newInstance(Estoque estoque, TipoItem tipoItem) {
+    public static ProdutoEstoqueFragment newInstance(Estoque estoque) {
         ProdutoEstoqueFragment fragment = new ProdutoEstoqueFragment();
         fragment.estoque = estoque;
-        fragment.tipoItem = tipoItem;
         Bundle args = new Bundle();
         return fragment;
     }
@@ -112,19 +105,10 @@ public class ProdutoEstoqueFragment extends Fragment {
         });
 
         List<Produto> estoqueList = new ArrayList<>();
-        adapter = new ProdutoEstoqueRecyclerViewAdapter(estoqueList, mListener);
+        adapter = new ProdutoEstoqueRecyclerViewAdapter(estoqueList);
         list.setAdapter(adapter);
-        Call<List<Produto>> call = null;
-        switch (tipoItem) {
-            case NORMAL:
-                call = ApiFstock.getInstance().descricaoProdutoService().listarProdutos(SharedPreferencesUtils.getUserId(getContext()), estoque.getId());
-                break;
-            case AVENCER:
-                break;
-        }
-
-        if (call != null) {
-            call.enqueue(new Callback<List<Produto>>() {
+        ApiFstock.getInstance().descricaoProdutoService().listarProdutos(SharedPreferencesUtils.getUserId(getContext()), estoque.getId())
+        .enqueue(new Callback<List<Produto>>() {
                 @Override
                 public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                     if (response.body() != null) {
@@ -157,7 +141,6 @@ public class ProdutoEstoqueFragment extends Fragment {
                     t.printStackTrace();
                 }
             });
-        }
 
         return view;
     }

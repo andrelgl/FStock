@@ -8,12 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import kn.fstock.fstock.Adapters.AVencerAdapter;
 import kn.fstock.fstock.Adapters.TabsAdapter;
 import kn.fstock.fstock.R;
 import kn.fstock.fstock.models.Estoque;
 import kn.fstock.fstock.models.Pessoa;
 
-public class    EstoqueMainFragment extends Fragment {
+public class EstoqueMainFragment extends Fragment {
 
     private Pessoa pessoa;
     private Estoque estoque;
@@ -40,8 +41,9 @@ public class    EstoqueMainFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_estoque_main, container, false);
 
         TabsAdapter tabsAdapter= new TabsAdapter(getActivity().getSupportFragmentManager());
-        tabsAdapter.adicionar(ProdutoEstoqueFragment.newInstance(estoque, ProdutoEstoqueFragment.TipoItem.NORMAL), "Atual");
-        tabsAdapter.adicionar(ProdutoEstoqueFragment.newInstance(estoque, ProdutoEstoqueFragment.TipoItem.AVENCER), "À vencer");
+        tabsAdapter.adicionar(ProdutoEstoqueFragment.newInstance(estoque), "Atual");
+        tabsAdapter.adicionar(AVencerFragment.newInstance(estoque), "À vencer");
+        tabsAdapter.adicionar(QuantidadeFragment.newInstance(estoque), "Quantidade");
 
         ViewPager pager = v.findViewById(R.id.viewpager);
         pager.setAdapter(tabsAdapter);
