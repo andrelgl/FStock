@@ -58,7 +58,7 @@ public class ApiFstock {
         public Date deserialize(JsonElement element, Type arg1, JsonDeserializationContext arg2) throws JsonParseException {
             String date = element.getAsString();
 
-            SimpleDateFormat formatter = new SimpleDateFormat("M/d/yy hh:mm a");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
             try {

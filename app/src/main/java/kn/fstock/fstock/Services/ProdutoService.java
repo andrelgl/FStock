@@ -34,6 +34,6 @@ public interface ProdutoService {
     @POST("pessoa/{pessoa_id}/estoque/{estoque_id}/produto/{produto_id}/item")
     Call<Void> criarItem(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id, @Path("produto_id") int produto_id, @Body Item item);
 
-    @DELETE("pessoa/{pessoa_id}/estoque/{estoque_id}/produto/{produto_id}")
-    Call<Void> deletarItem(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id, @Path("produto_id") int produto_id);
+    @DELETE("pessoa/{pessoa_id}/estoque/{estoque_id}/produto/{produto_id}/item/{item_id}")
+    Call<Void> deletarItem(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id, @Path("produto_id") int produto_id, @Path("item_id") int item_id);
 }

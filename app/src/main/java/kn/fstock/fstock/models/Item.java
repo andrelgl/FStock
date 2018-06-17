@@ -1,5 +1,6 @@
 package kn.fstock.fstock.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Item extends Base{
@@ -29,5 +30,11 @@ public class Item extends Base{
 
     public void setDt_validade(Date dt_validade) {
         this.dt_validade = dt_validade;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy");
+        return  formatter.format(dt_validade);
     }
 }

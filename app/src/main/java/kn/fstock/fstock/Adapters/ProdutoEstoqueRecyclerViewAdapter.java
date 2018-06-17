@@ -1,6 +1,7 @@
 package kn.fstock.fstock.Adapters;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -118,6 +121,32 @@ public class ProdutoEstoqueRecyclerViewAdapter extends RecyclerView.Adapter<Prod
                     .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                     myCalendar.get(Calendar.DAY_OF_MONTH)).show());
             mAlertDialog.show();
+        });
+
+        holder.remover.setOnClickListener(v -> {
+
+            CharSequence[] items = new CharSequence[ holder.mItem.getItems().size()];
+            for (int i = 0; i < holder.mItem.getItems().size(); i++) {
+                items[i] =  holder.mItem.getItems().get(i).toString();
+            }
+
+            new AlertDialog.Builder(holder.mView.getContext())
+                    .setTitle("Selecione o item a ser excluido")
+                    .setItems(items, (dialog, which) ->
+                            ApiFstock.getInstance().descricaoProdutoService().deletarItem(SharedPreferencesUtils.getUserId(holder.mView.getContext()),
+                                    holder.mItem.getEstoque_id(),
+                                    holder.mItem.getId(),
+                                    holder.mItem.getItems().get(which).getId()).enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+                                    holder.mItem.getItems().remove(which);
+                                    notifyDataSetChanged();
+                                }
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+
+                                }
+                            })).show();
         });
     }
 
