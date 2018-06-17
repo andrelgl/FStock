@@ -7,6 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -18,8 +19,11 @@ public interface PessoaService {
     @GET("pessoa/{pessoa_id}")
     Call<Pessoa> buscarPessoa(@Path("pessoa_id") int id);
 
+    @Headers({
+            "Content-Type: application/json",
+    })
     @POST("pessoa/")
-    Call<Void> criarPessoa(@Body Pessoa pessoa);
+    Call<Pessoa> criarPessoa(@Body Pessoa pessoa);
 
     @POST("pessoa/autenticar")
     Call<Pessoa> autenticarPessoa(@Body Pessoa pessoa);

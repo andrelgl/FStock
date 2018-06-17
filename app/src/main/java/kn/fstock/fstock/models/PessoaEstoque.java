@@ -4,6 +4,11 @@ public class PessoaEstoque extends Base{
     private int pessoa_id;
     private int estoque_id;
 
+    public PessoaEstoque(int pessoa_id, int estoque_id) {
+        this.pessoa_id = pessoa_id;
+        this.estoque_id = estoque_id;
+    }
+
     public int getPessoa_id() {
         return pessoa_id;
     }

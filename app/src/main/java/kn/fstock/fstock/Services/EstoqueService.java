@@ -4,6 +4,7 @@ import java.util.List;
 
 import kn.fstock.fstock.models.Estoque;
 import kn.fstock.fstock.models.Pessoa;
+import kn.fstock.fstock.models.PessoaEstoque;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -36,13 +37,13 @@ public interface EstoqueService {
     Call<List<Estoque>> alertVencimento(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id);
 
 
-    @POST("/pessoa/{pessoa_id}/estoque/{estoque_id}/pessoa")
-    Call<Void> adcionarPessoaEstoque(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id, @Body Pessoa pessoa);
+    @POST("pessoa/{pessoa_id}/estoque/{estoque_id}/pessoa")
+    Call<Void> adcionarPessoaEstoque(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id, @Body PessoaEstoque pessoa);
 
-    @GET("/pessoa/{pessoa_id}/estoque/{estoque_id}/pessoa")
+    @GET("pessoa/{pessoa_id}/estoque/{estoque_id}/pessoa")
     Call<List<Pessoa>> listarPessoaEstoque(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id);
 
-    @DELETE("/pessoa/{pessoa_id}/estoque/{estoque_id}/pessoa")
+    @DELETE("pessoa/{pessoa_id}/estoque/{estoque_id}/pessoa")
     Call<Void> deletarPessoaEstoque(@Path("pessoa_id") int pessoa_id, @Path("estoque_id") int estoque_id);
 
 }

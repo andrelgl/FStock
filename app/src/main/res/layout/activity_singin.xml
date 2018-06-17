@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp">
+    android:layout_marginRight="10dp"
+    android:gravity="center">
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/edit_text_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -23,11 +24,11 @@
         android:layout_height="5px" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/edit_text_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textWebEmailAddress"
         android:hint="@string/app_userEmail"
 
         android:textColorHint="@color/colorWhite"
@@ -39,7 +40,7 @@
         android:layout_height="5px" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/edit_text_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -53,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="5px" />
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/edit_text_confirm_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -71,11 +72,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_signIn"
-        android:layout_weight="0.1"
         android:backgroundTint="@color/colorButtonP"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9"/>
+        android:textColor="@color/colorPrimaryDark"/>
 </LinearLayout>

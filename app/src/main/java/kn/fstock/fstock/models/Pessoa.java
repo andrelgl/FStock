@@ -6,7 +6,6 @@ public class Pessoa extends Base {
     private String email;
     private String senha;
 
-
     public String getEmail() {
         return email;
     }

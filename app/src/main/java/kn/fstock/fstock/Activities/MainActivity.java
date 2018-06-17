@@ -49,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        if(SharedPreferencesUtils.getUserId(this) != -1)
-            startActivity(new Intent(getBaseContext(), ListaEstoqueActivity.class));
+        if(SharedPreferencesUtils.getUserId(this) != -1) {
+            Intent intent = new Intent(getBaseContext(), ListaEstoqueActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
     }
 
     public void singIn(View v) {
@@ -74,7 +77,9 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferencesUtils.putUserEmail(MainActivity.this, response.body().getEmail());
                     SharedPreferencesUtils.putUserName(MainActivity.this, response.body().getNome());
                     SharedPreferencesUtils.putUserId(MainActivity.this, response.body().getId());
-                    startActivity(new Intent(getBaseContext(), ListaEstoqueActivity.class));
+                    Intent intent = new Intent(getBaseContext(), ListaEstoqueActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 } else {
                     dialog.dismiss();
                     new AlertDialog.Builder(MainActivity.this)

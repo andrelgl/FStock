@@ -24,7 +24,7 @@
             android:name=".Activities.SingInActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".Activities.PrincipalActivity"
+            android:name=".Activities.EstoqueActivity"
             android:label="@string/title_activity_principal" />
         <activity
             android:name=".Activities.ListaEstoqueActivity"

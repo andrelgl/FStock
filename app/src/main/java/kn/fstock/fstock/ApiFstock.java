@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiFstock {
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://fstock.herokuapp.com/api/")
+         //   .baseUrl("http://192.168.51.200:8000/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
@@ -20,7 +21,6 @@ public class ApiFstock {
         }
         return INSTANSE;
     }
-
 
     public PessoaService descricaoPessoaService()  {
         return retrofit.create(PessoaService.class);

@@ -3,38 +3,43 @@ package kn.fstock.fstock.Adapters;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
-import kn.fstock.fstock.Activities.EstoqueActivity;
 import kn.fstock.fstock.ApiFstock;
 import kn.fstock.fstock.R;
 import kn.fstock.fstock.models.Estoque;
-import kn.fstock.fstock.utils.SharedPreferencesUtils;
+import kn.fstock.fstock.models.Pessoa;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdapterListaEstoque extends RecyclerView.Adapter<AdapterListaEstoque.ViewHolder>{
+public class AdapterListaPessoa extends RecyclerView.Adapter<AdapterListaPessoa.ViewHolder>{
 
-    List<Estoque> estoques;
+    public List<Pessoa> getPessoas() {
+        return pessoas;
+    }
+
+    List<Pessoa> pessoas;
+    private Estoque estoque;
     Context context;
 
-    public AdapterListaEstoque(List<Estoque> estoques, Context context) {
-        this.estoques = estoques;
+    public AdapterListaPessoa(List<Pessoa> pessoas, Estoque estoque, Context context) {
+        this.pessoas = pessoas;
+        this.estoque = estoque;
         this.context = context;
     }
 
-    public void addItem(Estoque estoque){
-        estoques.add(estoque);
+    public void addItem(Pessoa pessoa){
+        pessoas.add(pessoa);
         notifyDataSetChanged();
     }
 
@@ -42,7 +47,7 @@ public class AdapterListaEstoque extends RecyclerView.Adapter<AdapterListaEstoqu
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.item_estoque, parent, false);
+                .inflate(R.layout.item_pessoa_estoque, parent, false);
 
         ViewHolder holder = new ViewHolder(view);
 
@@ -51,8 +56,10 @@ public class AdapterListaEstoque extends RecyclerView.Adapter<AdapterListaEstoqu
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final Estoque item = estoques.get(position);
+        final Pessoa item = pessoas.get(position);
         holder.textView.setText(item.getNome());
+        holder.imageView.setVisibility(item.getId() == estoque.getPessoa_admin() ? View.VISIBLE : View.GONE);
+        holder.buton.setVisibility(item.getId() == estoque.getPessoa_admin() ? View.GONE : View.VISIBLE);
 
         holder.buton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,11 +67,11 @@ public class AdapterListaEstoque extends RecyclerView.Adapter<AdapterListaEstoqu
 
                 final ProgressDialog dialog = ProgressDialog.show(context, "",
                         "Carregando...", true, false);
-                    ApiFstock.getInstance().descricaoEstoqueService().deletarEstoque(SharedPreferencesUtils.getUserId(context),item.getId()).enqueue(new Callback<Void>() {
+                    ApiFstock.getInstance().descricaoEstoqueService().deletarPessoaEstoque(item.getId(), estoque.getId() ).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             dialog.dismiss();
-                            estoques.remove(position);
+                            pessoas.remove(position);
                             notifyDataSetChanged();
                         }
                         @Override
@@ -74,23 +81,15 @@ public class AdapterListaEstoque extends RecyclerView.Adapter<AdapterListaEstoqu
 
             }
         });
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, EstoqueActivity.class);
-                intent.putExtra("estoque_id",item.getId());
-                context.startActivity(intent);
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return estoques.size();
+        return pessoas.size();
     }
 
-    public void setList(List<Estoque> body) {
-        this.estoques = body;
+    public void setList(List<Pessoa> body) {
+        this.pessoas = body;
         notifyDataSetChanged();
     }
 
@@ -98,13 +97,15 @@ public class AdapterListaEstoque extends RecyclerView.Adapter<AdapterListaEstoqu
 
         public View view;
         public TextView textView;
+        public ImageView imageView;
         public ImageButton buton;
 
         public ViewHolder(View itemView) {
             super(itemView);
             view = itemView;
-            this.textView = itemView.findViewById(R.id.nome_estoque);
+            this.textView = itemView.findViewById(R.id.nome_pessoa);
             this.buton = itemView.findViewById(R.id.close_button);
+            this.imageView = itemView.findViewById(R.id.img_admin);
         }
 
 

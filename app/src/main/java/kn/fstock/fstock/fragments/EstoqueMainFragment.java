@@ -40,8 +40,8 @@ public class    EstoqueMainFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_estoque_main, container, false);
 
         TabsAdapter tabsAdapter= new TabsAdapter(getActivity().getSupportFragmentManager());
-        tabsAdapter.adicionar(ProdutoEstoqueFragment.newInstance(9), "Atual");
-        tabsAdapter.adicionar(ProdutoEstoqueFragment.newInstance(9), "À vencer");
+        tabsAdapter.adicionar(ProdutoEstoqueFragment.newInstance(estoque, ProdutoEstoqueFragment.TipoItem.NORMAL), "Atual");
+        tabsAdapter.adicionar(ProdutoEstoqueFragment.newInstance(estoque, ProdutoEstoqueFragment.TipoItem.AVENCER), "À vencer");
 
         ViewPager pager = v.findViewById(R.id.viewpager);
         pager.setAdapter(tabsAdapter);

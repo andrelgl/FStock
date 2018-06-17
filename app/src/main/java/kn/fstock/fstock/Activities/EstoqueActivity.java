@@ -18,12 +18,13 @@ import kn.fstock.fstock.fragments.PessoasEstoqueFragment;
 import kn.fstock.fstock.models.Estoque;
 import kn.fstock.fstock.models.Item;
 import kn.fstock.fstock.models.Pessoa;
+import kn.fstock.fstock.models.Produto;
 import kn.fstock.fstock.utils.SharedPreferencesUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PrincipalActivity extends AppCompatActivity implements ProdutoEstoqueFragment.OnListFragmentInteractionListener {
+public class EstoqueActivity extends AppCompatActivity implements ProdutoEstoqueFragment.OnListFragmentInteractionListener {
 
     private Pessoa pessoa;
     private Estoque estoque;
@@ -62,7 +63,7 @@ public class PrincipalActivity extends AppCompatActivity implements ProdutoEstoq
         pessoa.setNome(SharedPreferencesUtils.getUserName(this));
 
         getEstoque(getIntent().getIntExtra("estoque_id",-1));
-
+        setTitle("Estoque");
     }
 
     public void getEstoque(int id){
@@ -74,7 +75,6 @@ public class PrincipalActivity extends AppCompatActivity implements ProdutoEstoq
                     setUpNavigationBar();
                 }
             }
-
             @Override
             public void onFailure(Call<Estoque> call, Throwable t) {
 
@@ -85,10 +85,12 @@ public class PrincipalActivity extends AppCompatActivity implements ProdutoEstoq
     public void setUpNavigationBar(){
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setSelectedItemId(R.id.navigation_estoque);
+        setTitle(estoque.getNome());
     }
 
     @Override
-    public void onListFragmentInteraction(Item item) {
+    public void onListFragmentInteraction(Produto produto) {
 
     }
 }
